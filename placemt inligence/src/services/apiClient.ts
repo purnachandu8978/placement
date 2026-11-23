@@ -36,8 +36,17 @@ export const getAccessToken = (): string | null => {
   return inMemoryAccessToken;
 };
 
-export const API_BASE_URL =
-  (import.meta as any).env?.VITE_API_BASE_URL || '/api/v1';
+const rawApiBase = (import.meta as any).env?.VITE_API_BASE_URL || '/api/v1';
+
+export const API_BASE_URL = (() => {
+  if (!rawApiBase || rawApiBase === '/api/v1') return '/api/v1';
+  const clean = String(rawApiBase).trim().replace(/\/+$/, '');
+  // If base URL was provided without /api/v1 (e.g. https://placement-mcjt.onrender.com), automatically append /api/v1
+  if (!clean.endsWith('/api/v1') && !clean.includes('/api/')) {
+    return `${clean}/api/v1`;
+  }
+  return clean;
+})();
 
 export class ApiError extends Error {
   status: number;

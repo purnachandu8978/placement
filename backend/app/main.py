@@ -66,13 +66,24 @@ app.middleware("http")(maintenance_mode_middleware)
 
 
 # CORS Configuration
+_whitelisted_origins = set(settings.BACKEND_CORS_ORIGINS)
+_whitelisted_origins.update([
+    "https://placement-intelligence-two.vercel.app",
+    "https://placement-intelligence.vercel.app",
+    "https://purnachandu8978.github.io",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.BACKEND_CORS_ORIGINS,
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1|0\.0\.0\.0|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|.*\.vercel\.app)(:\d+)?$",
+    allow_origins=sorted(list(_whitelisted_origins)),
+    allow_origin_regex=r"^https://([a-zA-Z0-9-]+\.)*vercel\.app$|^https?://(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?$",
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=86400,
 )
 
 
@@ -102,6 +113,10 @@ async def health_check():
 
 # Mount Versioned API Router
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+# Also mount auth router directly under /auth as root alias for clients calling /auth without /api/v1 prefix
+from app.api.v1.endpoints.auth import router as auth_router
+app.include_router(auth_router, prefix="/auth", tags=["Authentication (Root Alias)"])
 
 
 @app.exception_handler(HTTPException)
