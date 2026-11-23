@@ -10,6 +10,8 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.0
+      - key: PYTHONPATH
+        value: backend
       - key: ENVIRONMENT
         value: production
       - key: MONGODB_URI
@@ -41,6 +43,8 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.0
+      - key: PYTHONPATH
+        value: backend
       - key: ENVIRONMENT
         value: production
       - key: MONGODB_URI
