@@ -1,0 +1,76 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pi_backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      ENVIRONMENT: production
+      UPLOAD_DIR: /app/uploads/resumes
+      CODE_EXECUTION_MODE: ${CODE_EXECUTION_MODE:-sandbox_service}
+      SANDBOX_SERVICE_URL: ${SANDBOX_SERVICE_URL:-http://sandbox-runner:8080}
+    depends_on:
+      - sandbox-runner
+    ports:
+      - "8000:8000"
+    volumes:
+      - resume_uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  backend-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pi_worker
+    restart: unless-stopped
+    command: ["python", "-m", "app.worker"]
+    env_file:
+      - ./backend/.env
+    environment:
+      ENVIRONMENT: production
+    depends_on:
+      - backend
+
+  sandbox-runner:
+    build:
+      context: ./sandbox_runner
+      dockerfile: Dockerfile
+    container_name: pi_sandbox_runner
+    restart: unless-stopped
+    environment:
+      SANDBOX_RUNTIME_IMAGE: ${SANDBOX_RUNTIME_IMAGE:-placement-sandbox-runtime:latest}
+      SANDBOX_SHARED_SECRET: ${SANDBOX_SHARED_SECRET:-}
+      SANDBOX_MAX_CONTAINERS: ${SANDBOX_MAX_CONTAINERS:-6}
+    ports:
+      - "8088:8080"
+    # Build runtime image before starting:
+    # docker build -f sandbox_runner/runtime.Dockerfile -t placement-sandbox-runtime:latest ./sandbox_runner
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./placemt inligence
+      dockerfile: Dockerfile
+    container_name: pi_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+      - "5173:80"
+
+volumes:
+  resume_uploads:

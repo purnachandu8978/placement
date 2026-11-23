@@ -1,0 +1,11 @@
+{
+  "name": "placement-intelligence-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix \"placemt inligence\" run dev",
+    "build": "npm --prefix \"placemt inligence\" run build",
+    "preview": "npm --prefix \"placemt inligence\" run preview"
+  }
+}
+

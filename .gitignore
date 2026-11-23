@@ -1,0 +1,38 @@
+# Placement Intelligence Root Git Ignore
+.env
+*.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/.venv/
+.venv/
+env/
+venv/
+ENV/
+.pytest_cache/
+*.log
+
+# Node & Frontend
+node_modules/
+placemt inligence/node_modules/
+placemt inligence/dist/
+dist/
+.npm
+*.tsbuildinfo
+
+# Uploads & Temporary Storage
+backend/uploads/
+uploads/
+scratch/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

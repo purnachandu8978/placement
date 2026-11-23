@@ -1,0 +1,9 @@
+.env
+*.db
+__pycache__/
+*.pyc
+serviceAccountKey.json
+*firebase-adminsdk*.json
+uploads/
+.pytest_cache/
+
