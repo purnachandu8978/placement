@@ -3,6 +3,8 @@
 *.env
 .env.*
 !.env.example
+serviceAccountKey.json
+*firebase-adminsdk*.json
 
 # Python
 __pycache__/

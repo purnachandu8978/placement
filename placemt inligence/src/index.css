@@ -1,0 +1,547 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ── ORANGE STUDENT PALETTE ── */
+  --color-brand-50:  #fff7f5;
+  --color-brand-100: #ffe8e1;
+  --color-brand-200: #ffc9b8;
+  --color-brand-300: #ffa48e;
+  --color-brand-400: #ff7a59;
+  --color-brand-500: #f97316;
+  --color-brand-600: #e86144;
+  --color-brand-700: #c2410c;
+  --color-brand-800: #9a3412;
+  --color-brand-900: #7c2d12;
+
+  /* ── BLUE ADMIN PALETTE ── */
+  --color-admin-50:  #eff6ff;
+  --color-admin-100: #dbeafe;
+  --color-admin-200: #bfdbfe;
+  --color-admin-300: #93c5fd;
+  --color-admin-400: #60a5fa;
+  --color-admin-500: #3b82f6;
+  --color-admin-600: #2563eb;
+  --color-admin-700: #1d4ed8;
+  --color-admin-800: #1e40af;
+  --color-admin-900: #1e3a8a;
+
+  /* ── SLATE NEUTRALS ── */
+  --color-slate-950: #0f172a;
+  --color-slate-900: #1e293b;
+  --color-slate-800: #334155;
+  --color-slate-700: #475569;
+  --color-slate-600: #64748b;
+  --color-slate-500: #94a3b8;
+  --color-slate-400: #cbd5e1;
+  --color-slate-300: #e2e8f0;
+  --color-slate-200: #f1f5f9;
+  --color-slate-100: #f8fafc;
+  --color-slate-50:  #ffffff;
+
+  /* ── SEMANTIC ── */
+  --color-accent-emerald: #059669;
+  --color-accent-amber:   #d97706;
+  --color-accent-rose:    #e11d48;
+  --color-accent-sky:     #0284c7;
+  --color-accent-purple:  #7c3aed;
+}
+
+:root {
+  --background: #FAFAF9;
+  --surface: #FFFFFF;
+  --surface-muted: #F5F6F8;
+  --text-primary: #172235;
+  --text-secondary: #64748B;
+  --brand-primary: #F97316;
+  --brand-hover: #EA580C;
+  --brand-soft: #FFF0E4;
+  --success: #16A36A;
+  --warning: #E9A23B;
+  --danger: #DC4545;
+  --border: #E6E8EC;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #faf8f5;
+  color: #1e293b;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(at 0% 0%,   rgba(255,122,89,0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(255,163,94,0.10) 0px, transparent 50%),
+    radial-gradient(at 50% 100%,rgba(255,200,150,0.08) 0px, transparent 55%),
+    radial-gradient(at 100% 100%,rgba(255,122,89,0.05) 0px, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* ── CUSTOM SCROLLBAR (Orange) ── */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: #faf8f5; }
+::-webkit-scrollbar-thumb { background: #ffc9b8; border-radius: 9999px; border: 2px solid #faf8f5; }
+::-webkit-scrollbar-thumb:hover { background: #FF7A59; }
+
+/* Admin sections can override scrollbar via class */
+.admin-scroll::-webkit-scrollbar-track { background: #eff6ff; }
+.admin-scroll::-webkit-scrollbar-thumb { background: #93c5fd; border-color: #eff6ff; }
+.admin-scroll::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+
+/* =========================================================================
+   SHARED CLAYMORPHISM DESIGN SYSTEM
+   ========================================================================= */
+
+/* ── Primary Clay Card (neutral, works in both portals) ── */
+.clay-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow:
+    0 14px 28px -4px rgba(0,0,0,0.05),
+    0 8px 16px -4px rgba(0,0,0,0.03),
+    inset 0 -3px 6px rgba(0,0,0,0.015),
+    inset 0 3px 6px rgba(255,255,255,0.95);
+  border: 1px solid rgba(226,232,240,0.8);
+  transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+.clay-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 38px -6px rgba(0,0,0,0.08),
+    0 12px 20px -4px rgba(0,0,0,0.04),
+    inset 0 -3px 6px rgba(0,0,0,0.02),
+    inset 0 3px 6px #ffffff;
+}
+
+/* ── Orange Tinted Clay Card (Student Portal) ── */
+.clay-card-peach {
+  background: linear-gradient(145deg, #ffffff 0%, #fff7f5 60%, #ffe8e1 100%);
+  border-radius: 22px;
+  box-shadow:
+    0 16px 32px -5px rgba(255,122,89,0.14),
+    0 6px 14px -2px rgba(0,0,0,0.04),
+    inset 0 -4px 8px rgba(255,122,89,0.06),
+    inset 0 4px 8px #ffffff;
+  border: 1px solid rgba(255,196,180,0.6);
+}
+
+/* ── Blue Tinted Clay Card (Admin Portal) ── */
+.clay-card-blue {
+  background: linear-gradient(145deg, #ffffff 0%, #eff6ff 60%, #dbeafe 100%);
+  border-radius: 22px;
+  box-shadow:
+    0 16px 32px -5px rgba(37,99,235,0.1),
+    0 6px 14px -2px rgba(0,0,0,0.03),
+    inset 0 -4px 8px rgba(37,99,235,0.05),
+    inset 0 4px 8px #ffffff;
+  border: 1px solid rgba(147,197,253,0.6);
+}
+
+/* ── Inset Surface (neutral) ── */
+.clay-inset {
+  background: #f8fafc;
+  box-shadow:
+    inset 0 3px 8px rgba(0,0,0,0.05),
+    inset 0 -2px 4px rgba(255,255,255,0.9);
+  border: 1px solid rgba(226,232,240,0.9);
+  border-radius: 14px;
+}
+
+/* ── Orange Inset (Student forms) ── */
+.clay-inset-peach {
+  background: #fff9f7;
+  box-shadow:
+    inset 0 3px 8px rgba(255,122,89,0.06),
+    inset 0 -2px 4px rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,196,180,0.5);
+  border-radius: 14px;
+}
+
+/* =========================================================================
+   BUTTONS
+   ========================================================================= */
+
+/* ── PRIMARY BUTTON — ORANGE (Student Portal) ── */
+.clay-button-peach {
+  background: linear-gradient(135deg, #FF7A59 0%, #f97316 50%, #E86144 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 14px;
+  box-shadow:
+    0 8px 18px -2px rgba(255,122,89,0.45),
+    0 3px 6px -1px rgba(0,0,0,0.06),
+    inset 0 -3px 5px rgba(0,0,0,0.12),
+    inset 0 2px 4px rgba(255,255,255,0.3);
+  transition: all 0.18s ease;
+  cursor: pointer;
+}
+
+.clay-button-peach:hover {
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 12px 24px -3px rgba(255,122,89,0.55),
+    inset 0 -3px 5px rgba(0,0,0,0.16),
+    inset 0 2px 4px rgba(255,255,255,0.4);
+}
+
+.clay-button-peach:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 4px 8px -2px rgba(255,122,89,0.35),
+    inset 0 3px 5px rgba(0,0,0,0.2);
+}
+
+/* ── PRIMARY BUTTON — BLUE (Admin Portal) ── */
+.clay-button-blue {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 14px;
+  box-shadow:
+    0 8px 18px -2px rgba(37,99,235,0.4),
+    0 3px 6px -1px rgba(0,0,0,0.06),
+    inset 0 -3px 5px rgba(0,0,0,0.18),
+    inset 0 2px 4px rgba(255,255,255,0.3);
+  transition: all 0.18s ease;
+  cursor: pointer;
+}
+
+.clay-button-blue:hover {
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 12px 24px -3px rgba(37,99,235,0.5),
+    inset 0 -3px 5px rgba(0,0,0,0.22),
+    inset 0 2px 4px rgba(255,255,255,0.4);
+}
+
+.clay-button-blue:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 4px 8px -2px rgba(37,99,235,0.3),
+    inset 0 3px 5px rgba(0,0,0,0.25);
+}
+
+/* ── WHITE / SECONDARY BUTTON ── */
+.clay-button-white {
+  background: #ffffff;
+  color: #334155;
+  font-weight: 600;
+  border-radius: 14px;
+  box-shadow:
+    0 6px 16px -2px rgba(0,0,0,0.05),
+    0 2px 4px rgba(0,0,0,0.02),
+    inset 0 -2px 4px rgba(0,0,0,0.03),
+    inset 0 2px 4px #ffffff;
+  border: 1px solid rgba(226,232,240,0.9);
+  transition: all 0.18s ease;
+  cursor: pointer;
+}
+
+.clay-button-white:hover {
+  background: #f8fafc;
+  color: #1e293b;
+  border-color: rgba(203,213,225,0.9);
+  box-shadow: 0 10px 22px -3px rgba(0,0,0,0.08), inset 0 2px 4px #ffffff;
+}
+
+/* ── Pill ── */
+.clay-pill {
+  border-radius: 9999px;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.04),
+    inset 0 -1.5px 3px rgba(0,0,0,0.04),
+    inset 0 1.5px 3px rgba(255,255,255,0.95);
+}
+
+/* ── Badge ── */
+.clay-badge {
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.04),
+    inset 0 -1px 2px rgba(0,0,0,0.03),
+    inset 0 1px 2px rgba(255,255,255,0.9);
+}
+
+/* =========================================================================
+   TEXT GRADIENTS
+   ========================================================================= */
+
+/* Orange gradient — Student headlines */
+.text-gradient-peach {
+  background: linear-gradient(135deg, #FF7A59 0%, #f97316 40%, #E86144 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Blue gradient — Admin headlines */
+.text-gradient-blue {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Mixed gradient — Landing page hero */
+.text-gradient-mixed {
+  background: linear-gradient(135deg, #FF7A59 0%, #f97316 35%, #3b82f6 70%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-dark {
+  background: linear-gradient(180deg, #0f172a 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =========================================================================
+   GLASS PANELS
+   ========================================================================= */
+
+/* Neutral glass (default) */
+.glass-panel {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226,232,240,0.6);
+  box-shadow:
+    0 10px 25px -5px rgba(0,0,0,0.06),
+    0 6px 12px -3px rgba(0,0,0,0.03),
+    inset 0 1px 2px #ffffff;
+}
+
+/* Orange-tinted glass (Student) */
+.glass-panel-peach {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,196,180,0.5);
+  box-shadow:
+    0 10px 25px -5px rgba(255,122,89,0.08),
+    0 6px 12px -3px rgba(0,0,0,0.03),
+    inset 0 1px 2px #ffffff;
+}
+
+/* Blue-tinted glass (Admin) */
+.glass-panel-blue {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(191,219,254,0.5);
+  box-shadow:
+    0 10px 25px -5px rgba(37,99,235,0.07),
+    0 6px 12px -3px rgba(0,0,0,0.03),
+    inset 0 1px 2px #ffffff;
+}
+
+.glass-panel-elevated {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,196,180,0.5);
+  box-shadow:
+    0 20px 40px -8px rgba(255,122,89,0.14),
+    0 8px 16px -4px rgba(0,0,0,0.04),
+    inset 0 2px 4px #ffffff;
+}
+
+.glass-panel-subtle {
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(226,232,240,0.3);
+}
+
+/* =========================================================================
+   FLOW RIBBON
+   ========================================================================= */
+
+.flow-ribbon { position: relative; overflow: hidden; }
+.flow-ribbon::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40px; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(250,248,245,0.9));
+  pointer-events: none;
+}
+
+/* =========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================= */
+
+@keyframes clayFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes pulsePeach {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.05); }
+}
+
+@keyframes rippleWavePeach {
+  0%   { box-shadow: 0 0 0 0 rgba(255,122,89,0.4); }
+  70%  { box-shadow: 0 0 0 14px rgba(255,122,89,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,122,89,0); }
+}
+
+@keyframes rippleWaveBlue {
+  0%   { box-shadow: 0 0 0 0 rgba(37,99,235,0.35); }
+  70%  { box-shadow: 0 0 0 14px rgba(37,99,235,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.animate-clay-float    { animation: clayFloat 3.8s ease-in-out infinite; }
+.animate-pulse-peach   { animation: pulsePeach 2.8s ease-in-out infinite; }
+.animate-ripple-peach  { animation: rippleWavePeach 2s infinite; }
+.animate-ripple-blue   { animation: rippleWaveBlue  2s infinite; }
+
+/* =========================================================================
+   MOBILE-FIRST UTILITY OVERRIDES
+   ========================================================================= */
+
+/* Touch target sizing */
+@media (max-width: 640px) {
+  button, a[role="button"] {
+    min-height: 44px;
+  }
+
+  /* Prevents iOS zoom on inputs */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Better mobile cards */
+  .clay-card, .clay-card-peach, .clay-card-blue {
+    border-radius: 16px;
+  }
+
+  /* Full-width CTA buttons on mobile */
+  .mobile-full-btn {
+    width: 100%;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-top    { padding-top: env(safe-area-inset-top); }
+}
+
+/* =========================================================================
+   PRINT
+   ========================================================================= */
+
+@media print {
+  body { background: #ffffff !important; color: #000000 !important; }
+  header, aside, nav, .no-print { display: none !important; }
+  .clay-card, .glass-panel, .clay-card-peach, .clay-card-blue {
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ── ISOMETRIC 3D ECOSYSTEM KEYFRAMES ── */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.4deg);
+  }
+}
+
+@keyframes floatMedium {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-13px) rotate(-0.5deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(0.3deg);
+  }
+}
+
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pathwayPulse {
+  0%, 100% {
+    stroke-dashoffset: 0;
+    opacity: 0.6;
+  }
+  50% {
+    stroke-dashoffset: 24;
+    opacity: 1;
+  }
+}
+
+@keyframes gentleGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.02);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: floatMedium 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 7s ease-in-out infinite;
+}
+
+.animate-radar {
+  animation: radarSweep 10s linear infinite;
+  transform-origin: center;
+}
+
+.animate-pathway {
+  animation: pathwayPulse 3s linear infinite;
+}
+
+.animate-glow-pulse {
+  animation: gentleGlow 4s ease-in-out infinite;
+}
+
+.perspective-isometric {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
