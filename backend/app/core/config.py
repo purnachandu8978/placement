@@ -66,6 +66,7 @@ class Settings(BaseSettings):
 
     # CORS Configuration
     BACKEND_CORS_ORIGINS: List[str] = [
+        "https://placement-intelligence-two.vercel.app",
         "https://purnachandu8978.github.io",
         "http://localhost:5173",
         "http://127.0.0.1:5173",
