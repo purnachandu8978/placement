@@ -15,13 +15,15 @@ services:
       - key: MONGODB_URI
         sync: false
       - key: MONGODB_DATABASE
-        value: placement_intelligence
+        value: placement
+      - key: MONGODB_DB_NAME
+        value: placement
       - key: SECRET_KEY
         generateValue: true
       - key: ADMIN_SECRET_KEY
         generateValue: true
       - key: BACKEND_CORS_ORIGINS
-        value: '["https://placement-intelligence.vercel.app","http://localhost:5173"]'
+        value: '["https://purnachandu8978.github.io","http://localhost:5173"]'
       - key: FIREBASE_PROJECT_ID
         sync: false
       - key: FIREBASE_CLIENT_EMAIL

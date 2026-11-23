@@ -41,7 +41,7 @@ class Settings(BaseSettings):
 
     # MongoDB Atlas Configuration (official Motor async driver)
     MONGODB_URI: str = ""
-    MONGODB_DB_NAME: str = "placement_intelligence"
+    MONGODB_DB_NAME: str = "placement"
     MONGODB_MAX_POOL_SIZE: int = 50
     MONGODB_MIN_POOL_SIZE: int = 5
     MONGODB_MAX_IDLE_TIME_MS: int = 45000
@@ -66,6 +66,7 @@ class Settings(BaseSettings):
 
     # CORS Configuration
     BACKEND_CORS_ORIGINS: List[str] = [
+        "https://purnachandu8978.github.io",
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000",
