@@ -12,7 +12,7 @@ import firebase_admin
 from firebase_admin import auth, credentials
 from fastapi import HTTPException, status
 from google.auth import jwt as google_jwt
-import requests
+import httpx
 from app.core.config import BACKEND_ROOT, settings
 
 logger = logging.getLogger("placement_intelligence.firebase")
@@ -149,7 +149,7 @@ def _parse_max_age(cache_control: str) -> int:
 def _fetch_google_firebase_certs() -> tuple[Dict[str, str], int]:
     """Fetches Firebase public x509 certificates from Google with strict timeout and fallback."""
     try:
-        resp = requests.get(_GOOGLE_FIREBASE_CERTS_URL, timeout=(2, 3))
+        resp = httpx.get(_GOOGLE_FIREBASE_CERTS_URL, timeout=3.0)
         resp.raise_for_status()
         data = resp.json()
         if not isinstance(data, dict) or not data:
