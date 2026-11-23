@@ -74,8 +74,9 @@ export async function getAndRegisterFCMToken(): Promise<string | null> {
   if (Notification.permission !== 'granted') return null;
 
   try {
-    const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
-      scope: '/',
+    const swUrl = `${import.meta.env.BASE_URL}firebase-messaging-sw.js`;
+    const registration = await navigator.serviceWorker.register(swUrl, {
+      scope: import.meta.env.BASE_URL,
     });
     await navigator.serviceWorker.ready;
 

@@ -148,7 +148,7 @@ export const StartupMapPage: React.FC = () => {
   const loadGeoJson = async () => {
     try {
       setGeoLoading(true);
-      const res = await fetch('/data/geo/india_states_web.geojson');
+      const res = await fetch(`${import.meta.env.BASE_URL}data/geo/india_states_web.geojson`);
       if (res.ok) {
         const data = await res.json();
         setGeoFeatures(data.features || []);

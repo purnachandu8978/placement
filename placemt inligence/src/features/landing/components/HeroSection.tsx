@@ -133,9 +133,9 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
 
               {/* Maximum-Sized Hero Image (WebP with PNG Fallback) */}
               <picture>
-                <source srcSet="/assets/images/hero-student-collage.webp" type="image/webp" />
+                <source srcSet={`${import.meta.env.BASE_URL}assets/images/hero-student-collage.webp`} type="image/webp" />
                 <img
-                  src="/assets/images/hero-student-collage.png"
+                  src={`${import.meta.env.BASE_URL}assets/images/hero-student-collage.png`}
                   alt="Placement Intelligence — Student Career Readiness Ecosystem"
                   className="w-full h-auto max-w-[380px] sm:max-w-[480px] md:max-w-[560px] lg:max-w-[660px] xl:max-w-[780px] 2xl:max-w-[860px] object-contain object-center drop-shadow-2xl select-none transition-all duration-300 hover:scale-[1.015]"
                   width={1024}

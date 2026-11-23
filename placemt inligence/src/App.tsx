@@ -15,7 +15,7 @@ export default function App() {
         <StudentDataProvider>
           <NotificationProvider>
             <ToastProvider>
-              <BrowserRouter>
+              <BrowserRouter basename={import.meta.env.BASE_URL}>
                 <ScrollManager />
                 <AppRouter />
               </BrowserRouter>
