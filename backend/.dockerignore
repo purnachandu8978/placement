@@ -1,0 +1,13 @@
+# Backend Dockerignore
+.venv
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+tests
+*.log
+uploads
+.env
+.env.*
+!.env.example
+serviceAccountKey.json

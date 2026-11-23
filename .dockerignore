@@ -1,0 +1,25 @@
+# Root Dockerignore for Placement Intelligence
+.git
+.gitignore
+.vscode
+.pytest_cache
+scratch
+*.log
+
+# Python Virtual Environments & Bytecode
+.venv
+backend/.venv
+**/__pycache__
+**/*.pyc
+**/*.pyo
+
+# Node Modules & Build Outputs
+node_modules
+placemt inligence/node_modules
+placemt inligence/dist
+
+# Environment & Local Secrets
+.env
+.env.*
+!.env.example
+serviceAccountKey.json

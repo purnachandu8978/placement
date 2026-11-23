@@ -1,0 +1,6 @@
+# Sandbox Runner Dockerignore
+__pycache__
+*.pyc
+*.pyo
+.git
+*.log
