@@ -5,8 +5,10 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 export default defineConfig(({ mode }) => {
-  // Use VITE_BASE_PATH if explicitly provided, else in production default to repository subpath '/placement/', or '/' in dev
-  const basePath = process.env.VITE_BASE_PATH || (mode === 'production' ? '/placement/' : '/');
+  // Vercel and custom root domains deploy at '/'. GitHub Pages project sites deploy at '/placement/'.
+  const isVercel = Boolean(process.env.VERCEL);
+  const defaultProdBase = isVercel ? '/' : '/placement/';
+  const basePath = process.env.VITE_BASE_PATH || (mode === 'production' ? defaultProdBase : '/');
 
   return {
     base: basePath,
